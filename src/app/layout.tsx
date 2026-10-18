@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { clinic } from "@/lib/content";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -8,13 +9,21 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+// Branding is pulled from lib/content.ts so a rebrand in one place
+// updates the title, Open Graph and Twitter cards automatically.
+const BRAND = clinic.name;
+const TITLE = `${BRAND} — ${clinic.tagline}`;
+const DESCRIPTION =
+  "Experience exceptional dental care with modern technology, compassionate professionals, and personalized treatment designed around your smile. General, cosmetic, whitening, implants, orthodontics, pediatric and emergency dentistry. Book your appointment today.";
+const OG_IMAGE =
+  "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1200&q=80";
+
 export const metadata: Metadata = {
   title: {
-    template: "%s | Pearlies Dental Clinic",
-    default: "Pearlies Dental Clinic — Your Smile, Our Passion | Kalanki, Kathmandu",
+    template: `%s | ${BRAND}`,
+    default: TITLE,
   },
-  description:
-    "Experience exceptional dental care with modern technology, compassionate professionals, and personalized treatment. General, cosmetic, whitening, implants, orthodontics, pediatric & emergency dentistry in Kalanki, Kathmandu. Book your appointment today.",
+  description: DESCRIPTION,
   keywords: [
     "dental clinic Kathmandu",
     "dentist Kalanki",
@@ -24,30 +33,22 @@ export const metadata: Metadata = {
     "pediatric dentist",
     "cosmetic dentistry",
   ],
-  authors: [{ name: "Pearlies Dental Clinic" }],
-  creator: "Pearlies Dental Clinic",
+  authors: [{ name: BRAND }],
+  creator: BRAND,
+  applicationName: BRAND,
   openGraph: {
-    title: "Pearlies Dental Clinic — Your Smile, Our Passion",
-    description:
-      "Premium dental care in Kalanki, Kathmandu. Modern technology, compassionate professionals, personalized treatment designed around your smile.",
+    title: TITLE,
+    description: DESCRIPTION,
     type: "website",
     locale: "en_NP",
-    siteName: "Pearlies Dental Clinic",
-    images: [
-      {
-        url: "https://images.unsplash.com/photo-1657470179447-0f5aa16daa91?auto=format&fit=crop&w=1200&q=80",
-        width: 1200,
-        height: 630,
-        alt: "Modern dental clinic — Pearlies Dental",
-      },
-    ],
+    siteName: BRAND,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: `${BRAND} — modern dental care` }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pearlies Dental Clinic — Your Smile, Our Passion",
-    description:
-      "Premium dental care in Kalanki, Kathmandu. Book your appointment today.",
-    images: ["https://images.unsplash.com/photo-1657470179447-0f5aa16daa91?auto=format&fit=crop&w=1200&q=80"],
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
   },
   robots: {
     index: true,
@@ -59,7 +60,8 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  metadataBase: new URL("https://pearliesdental.com.np"),
+  // Site lives on GitHub Pages; update when a custom domain is added.
+  metadataBase: new URL("https://tickkkkkkyg.github.io/pearlies-dental"),
 };
 
 export default function RootLayout({

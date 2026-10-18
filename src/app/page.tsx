@@ -14,7 +14,8 @@ import ContactSection from "@/components/sections/contact-section";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "Your Dental Clinic — Your Smile, Our Passion",
+  // Title inherits the layout default ("<Brand> — <tagline>") so the
+  // template in layout.tsx is not duplicated onto the home page.
   description:
     "Experience exceptional dental care with modern technology, compassionate professionals, and personalized treatment designed around your smile. Book your appointment today.",
 };
