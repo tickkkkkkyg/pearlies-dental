@@ -1,0 +1,4 @@
+:HL["/pearlies-dental/_next/static/chunks/3k1h10zf3iw_g.css","style"]
+:HL["/pearlies-dental/_next/static/media/fba5a26ea33df6a3-s.p.18rizl4rsrl42.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+1:[["children",{"s":"__PAGE__","h":160}]]
+0:{"b":"SylgKgHyLxQNJRUFAWlZx","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
