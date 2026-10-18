@@ -4,64 +4,40 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { faq } from "@/lib/content";
-import { cn } from "@/lib/utils";
 
 export default function FAQ() {
-  const [openId, setOpenId] = useState<string | null>(null);
-
+  const [open, setOpen] = useState<string | null>("q1");
   return (
-    <section id="faq" className="py-20 lg:py-32 bg-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            Everything you need to know before your visit.
-          </p>
+    <section id="faq" className="bg-[#f8fafc] py-14 lg:py-20">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0f766e]">FAQ</p>
+          <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Questions, answered</h2>
+          <p className="mt-3 text-sm leading-relaxed text-slate-600">Appointments, treatments, payments, hygiene and emergencies — everything before your visit.</p>
         </div>
-
-        <div className="max-w-2xl mx-auto space-y-3">
-          {faq.map((item) => {
-            const isOpen = openId === item.id;
+        <div className="mt-8 space-y-3">
+          {faq.map((it) => {
+            const isOpen = open === it.id;
             return (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: item.id === "q1" ? 0 : 0.1 }}
-                className="rounded-xl border border-slate-100 bg-white shadow-sm overflow-hidden"
-              >
+              <div key={it.id} className="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm">
                 <button
-                  onClick={() =>
-                    setOpenId(isOpen ? null : item.id)
-                  }
+                  onClick={() => setOpen(isOpen ? null : it.id)}
                   aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between px-6 py-4 text-left bg-transparent text-slate-900 font-semibold text-lg hover:bg-slate-50 transition-colors focus-visible-ring"
+                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
                 >
-                  {item.q}
-                  <ChevronDown
-                    className={cn(
-                      "h-5 w-5 text-slate-400 transition-transform duration-200",
-                      isOpen && "rotate-180",
-                    )}
-                  />
+                  <span className="text-sm font-bold text-slate-900 sm:text-base">{it.q}</span>
+                  <span className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border transition ${isOpen ? "rotate-180 border-teal-200 bg-teal-50 text-teal-700" : "border-slate-200 bg-white text-slate-500"}`}>
+                    <ChevronDown className="h-4 w-4" />
+                  </span>
                 </button>
-                <AnimatePresence>
+                <AnimatePresence initial={false}>
                   {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="px-6 pb-6"
-                    >
-                      <p className="text-slate-600 leading-relaxed">
-                        {item.a}
-                      </p>
+                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22 }}>
+                      <div className="px-5 pb-5 text-sm leading-relaxed text-slate-600">{it.a}</div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </div>
             );
           })}
         </div>

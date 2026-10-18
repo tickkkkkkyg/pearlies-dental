@@ -3,6 +3,7 @@ import Navbar from "@/components/sections/navbar";
 import Hero from "@/components/sections/hero";
 import TrustIndicators from "@/components/sections/trust-indicators";
 import Services from "@/components/sections/services";
+import About from "@/components/sections/about";
 import Team from "@/components/sections/team";
 import WhyChooseUs from "@/components/sections/why-choose-us";
 import Testimonials from "@/components/sections/testimonials";
@@ -13,19 +14,20 @@ import ContactSection from "@/components/sections/contact-section";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "Pearlies Dental Clinic — Your Smile, Our Passion",
+  title: "Your Dental Clinic — Your Smile, Our Passion",
   description:
-    "Premium dental care in Kalanki, Kathmandu. General dentistry, teeth whitening, braces, implants, root canal, pediatric and cosmetic dentistry. Book your appointment today.",
+    "Experience exceptional dental care with modern technology, compassionate professionals, and personalized treatment designed around your smile. Book your appointment today.",
 };
 
 export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <Hero />
         <TrustIndicators />
         <Services />
+        <About />
         <Team />
         <WhyChooseUs />
         <Testimonials />

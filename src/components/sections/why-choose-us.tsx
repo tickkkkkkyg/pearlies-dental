@@ -1,71 +1,37 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Shield, DollarSign, Layers, Users } from "lucide-react";
+import { Heart, ShieldCheck, Sparkles, UserCheck, Receipt, Clock3 } from "lucide-react";
 import { whyChooseUs } from "@/lib/content";
 import type { ReactElement } from "react";
 
-const featureIcons: Record<string, ReactElement> = {
-  "gentle-care": <Shield className="h-6 w-6" />,
-  "transparent-pricing": <DollarSign className="h-6 w-6" />,
-  "modern-technology": <Layers className="h-6 w-6" />,
-  "family-friendly": <Users className="h-6 w-6" />,
+const icons: Record<string, ReactElement> = {
+  comfort: <Heart className="h-5 w-5" />,
+  experienced: <UserCheck className="h-5 w-5" />,
+  technology: <ShieldCheck className="h-5 w-5" />,
+  personalized: <Sparkles className="h-5 w-5" />,
+  transparent: <Receipt className="h-5 w-5" />,
+  convenient: <Clock3 className="h-5 w-5" />,
 };
 
 export default function WhyChooseUs() {
   return (
-    <section id="why-us" className="py-20 lg:py-32 bg-white">
+    <section id="why-us" className="bg-white py-14 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-              Why Choose Pearlies?
-            </h2>
-            <p className="text-lg text-slate-600 leading-relaxed">
-              We believe great dental care is about more than just treatment —
-              it&apos;s about trust, comfort, and lasting relationships.
-            </p>
-            <div className="space-y-4 pt-2">
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-teal-600 mt-2" />
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  Gentle techniques and modern anesthesia for pain-free visits.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-teal-600 mt-2" />
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  Clear treatment plans with no surprise charges.
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-teal-600 mt-2" />
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  ISO-certified sterilization and digital diagnostics.
-                </p>
-              </div>
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0f766e]">Why Choose Us</p>
+          <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Dentistry that feels different</h2>
+          <p className="mt-3 text-[15px] leading-relaxed text-slate-600">Six reasons patients trust us — comfort, expertise, technology, and honest care in one welcoming home.</p>
+        </div>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {whyChooseUs.map((f) => (
+            <div key={f.id} className="rounded-2xl border border-slate-100 bg-[#f8fafc] p-6 shadow-sm">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white text-[#0f766e] shadow-sm ring-1 ring-slate-100">
+                {icons[f.id] ?? <Sparkles className="h-5 w-5" />}
+              </span>
+              <h3 className="mt-4 text-base font-extrabold text-slate-900">{f.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{f.description}</p>
             </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {whyChooseUs.map((feature) => (
-              <motion.div
-                key={feature.id}
-                whileHover={{ y: -4 }}
-                className="rounded-xl border border-slate-100 bg-slate-50 p-6 shadow-sm hover:border-teal-200 transition-colors"
-              >
-                <div className="rounded-lg bg-white p-3 text-teal-600 shadow-sm mb-4">
-                  {featureIcons[feature.id]}
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+          ))}
         </div>
       </div>
     </section>
