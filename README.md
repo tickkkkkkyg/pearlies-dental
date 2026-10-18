@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pearlies Dental Clinic
+
+Premium dental clinic website for Pearlies Dental Clinic in Kalanki, Kathmandu, Nepal.
+
+Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, framer-motion, react-hook-form, zod, and lucide-react. Hand-rolled UI primitives — no shadcn or radix.
+
+## Features
+
+- Homepage with nav, hero ("Your Smile, Our Passion"), trust indicators, 8 service cards, dentist profiles with credentials, why-choose-us, testimonials, gallery, FAQ accordion, appointment form, contact section with Google Maps embed, and footer.
+- Responsive, accessible, smooth animations, optimized images, working appointment form with client-side validation.
+- Appointment requests hand off to WhatsApp with prefilled details (static hosting has no booking server — nothing is ever claimed as "booked" unless a real backend accepts it).
+
+## Tech Stack
+
+- Next.js 16.4.2 (App Router)
+- React 19, TypeScript
+- Tailwind CSS v4 (`@theme`, `src` dir, `@/*` alias)
+- framer-motion, lucide-react, clsx, tailwind-merge
+- react-hook-form + zod validation
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev          # dev server at http://localhost:3000
+pnpm build        # production build (next start)
+pnpm build:pages  # static export for GitHub Pages (out/)
+pnpm lint         # ESLint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment — GitHub Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The site is deployed as a static export from the `gh-pages` branch to https://tickkkkkkyg.github.io/pearlies-dental/.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm build:pages           # builds `out/` with GITHUB_PAGES=1 (basePath /pearlies-dental)
+cd out
+git init
+git add -A && git commit -m "deploy"
+git push -f <repo-url> HEAD:gh-pages
+```
 
-## Learn More
+GitHub Pages source is set to the `gh-pages` branch. The `public/.nojekyll` file prevents Jekyll processing.
 
-To learn more about Next.js, take a look at the following resources:
+Images are loaded directly from Unsplash (`images.unoptimized: true`) since the default Next.js image optimizer is unavailable in a static export.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Appointment Form
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The form validates with zod and, on submit, opens a WhatsApp chat prefilled with the visitor's name, phone, service, date/time, and note. This works entirely on static hosting and never fakes a booking confirmation.
