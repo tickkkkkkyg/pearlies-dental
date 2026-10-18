@@ -1,26 +1,107 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* ---- Palette: white, soft teal, mint green, deep navy ---- */
+  --color-navy: #0f172a;
+  --color-navy-soft: #1e293b;
+  --color-teal: #14b8a6;
+  --color-teal-soft: #2dd4bf;
+  --color-mint: #a7f3d0;
+  --color-mint-soft: #d1fae5;
+  --color-white: #ffffff;
+  --color-slate-900: #0f172a;
+  --color-slate-800: #1e293b;
+  --color-slate-700: #334155;
+  --color-slate-600: #475569;
+  --color-slate-500: #64748b;
+  --color-slate-400: #94a3b8;
+  --color-slate-100: #f1f5f9;
+  --color-slate-50: #f8fafc;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* ---- Semantic ---- */
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-muted: #64748b;
+  --color-muted-foreground: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-input: #e2e8f0;
+  --color-ring: #14b8a6;
+  --color-accent: #14b8a6;
+  --color-accent-foreground: #ffffff;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-success: #10b981;
+  --color-success-foreground: #ffffff;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* ---- Radius ---- */
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* ---- Fonts ---- */
+  --font-sans: var(--font-inter);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter);
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* ---- Utilities ---- */
+.text-balance {
+  text-wrap: balance;
+}
+
+.focus-visible-ring {
+  outline: none;
+}
+.focus-visible-ring:focus-visible {
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.4);
+}
+
+/* ---- Custom scrollbar ---- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ---- Reveal animation helpers ---- */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.reveal-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+/* ---- Page loader (server-rendered, no JS dependency for content) ---- */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.page-loader.done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
